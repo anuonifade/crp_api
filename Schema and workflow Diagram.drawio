@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-06-24T01:49:45.624Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36" etag="1etHlp5k8fIBnUfU-JWN" version="13.1.1" type="github">
+<mxfile host="app.diagrams.net" modified="2020-06-24T01:52:01.544Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36" etag="ggmwyx8x-2Q9Y4DCXJgW" version="13.1.1" type="github">
   <diagram id="Wy2fdePZcEcgJuRb0x6n" name="Page-1">
-    <mxGraphModel dx="1678" dy="934" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2037" dy="1134" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -87,6 +87,11 @@
         <mxCell id="mcqtp2vvtmeLN--FUrFd-37" value="Get Referrer Link" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="395" y="930" width="240" height="120" as="geometry" />
         </mxCell>
+        <mxCell id="mcqtp2vvtmeLN--FUrFd-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.917;entryY=1.003;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="mcqtp2vvtmeLN--FUrFd-40" target="mcqtp2vvtmeLN--FUrFd-44">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1069.9999999999995" y="820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="mcqtp2vvtmeLN--FUrFd-40" value="Invite User/ Users" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="760" y="1020" width="230" height="120" as="geometry" />
         </mxCell>
@@ -101,6 +106,9 @@
         </mxCell>
         <mxCell id="mcqtp2vvtmeLN--FUrFd-45" value="If User register with a Referrer Link" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
           <mxGeometry x="740" y="650" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="mcqtp2vvtmeLN--FUrFd-47" value="If 5 Users registers successfully&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" vertex="1" parent="1">
+          <mxGeometry x="875" y="920" width="190" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
