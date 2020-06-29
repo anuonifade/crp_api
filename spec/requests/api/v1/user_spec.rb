@@ -1,4 +1,5 @@
-require 'swagger_helper'
+require 'rails_helper'
 
-RSpec.describe 'api/v1/user', type: :request do
+RSpec.describe "Api::V1::Users", type: :request do
+
 end
