@@ -17,6 +17,14 @@ RSpec.configure do |config|
   config.swagger_docs = {
     'v1/swagger.yaml' => {
       openapi: '3.0.1',
+      components: {
+        securitySchemes: {
+          bearer_auth: {
+            type: :http,
+            scheme: :bearer
+          }
+        }
+      },
       info: {
         title: 'API V1',
         version: 'v1'

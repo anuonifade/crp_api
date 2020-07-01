@@ -163,11 +163,14 @@ describe 'CRP API' do
       tags 'Get Logged in User referral link'
       produces 'application/json'
       response '200', 'User found' do 
+        let(:user) { create(:user_with_referral) }
+        let(:Authorization) { "Basic #{{user: user.id}}" }
         examples 'application/json' => {}
         run_test!
       end
 
       response '401', 'invalid Authentication' do
+        let(:Authorization) { "Basic #{{user: 'Invalid'}}" }
         examples 'application/json' => {}
         run_test!
       end
@@ -178,12 +181,15 @@ describe 'CRP API' do
     get 'Get Rewards for logged in User' do
       tags 'Get Rewards'
       produces 'application/json'
-      response '200', 'User found' do 
+      response '200', 'User found' do
+        let(:user) { create(:user_with_referral) }
+        let(:Authorization) { "Basic #{{user: user.id}}" }
         examples 'application/json' => {}
         run_test!
       end
 
       response '401', 'invalid Authentication' do
+        let(:Authorization) { "Basic #{{user: 'Invalid'}}" }
         examples 'application/json' => {}
         run_test!
       end
@@ -195,11 +201,14 @@ describe 'CRP API' do
       tags 'Get Invited registered users'
       produces 'application/json'
       response '200', 'User found' do 
+        let(:user) { create(:user_with_referral) }
+        let(:Authorization) { "Basic #{{user: user.id}}" }
         examples 'application/json' => {}
         run_test!
       end
 
       response '401', 'invalid Authentication' do
+        let(:Authorization) { "Basic #{{user: 'Invalid'}}" }
         examples 'application/json' => {}
         run_test!
       end
@@ -225,6 +234,8 @@ describe 'CRP API' do
       }
 
       response '200', 'Invitation was sent Successfully' do
+        let(:user) { create(:user_with_referral) }
+        let(:Authorization) { "Basic #{{user: user.id}}" }
         examples 'application/json' => {message: 'Invitations successfully sent'}
 
         let(:params) {{
