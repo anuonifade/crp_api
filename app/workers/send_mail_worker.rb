@@ -1,10 +1,10 @@
 class SendMailWorker
-  include SideKiq::Worker
+  include Sidekiq::Worker
   sidekiq_options retry: false
 
   def perform(emails)
     emails.each do |email|
-      UserMailer.with(email: email).deliver_now
+      UserMailer.send_mail(email).deliver_later
     end
   end
 end
