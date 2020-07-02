@@ -6,6 +6,7 @@ class Api::V1::UserController < ApplicationController
   end
 
   def create
+    # Registers user with or without referral
     user_data = user_params.merge({
       'referral_token' => SecureRandom.alphanumeric(16)
     })
@@ -29,15 +30,19 @@ class Api::V1::UserController < ApplicationController
   end
 
   def authenticate
+    # Authenticate User
     token = AuthenticateUser.new(auth_params[:email], auth_params[:password]).call
     json_response(auth_token: token)
   end
 
   def invite_users
-    emails = SendMailWorker.perform_asyn(email_params)
+    # Send invitation to users by scheduling with sidekiq worker.
+    SendMailWorker.perform_async(params[:emails])
+    json_response({message: 'Emails has been sent successfully'})
   end
 
   def update
+    # Update user information
     current_user.update_attributes(
       first_name: user_params[:first_name],
       last_name: user_params[:last_name],
@@ -52,6 +57,7 @@ class Api::V1::UserController < ApplicationController
   end
 
   def show
+    # Fetch  user information
     response = {
       first_name: current_user[:first_name],
       last_name: current_user[:last_name],
@@ -61,11 +67,14 @@ class Api::V1::UserController < ApplicationController
   end
 
   def referral_link
+    # Fetch referral link to share with others
     referral_token = User.find(current_user.id).referral_token
     json_response({referral_link: "#{api_v1_create_user_path}/#{referral_token}"})
   end
 
   def invited_users
+    # User can get all the users they invited 
+    # And registered successfully
     @invited_users = current_user.users.select(:id, :first_name, :last_name, :email).all
     json_response({invited_users: @invited_users})
   end
@@ -77,6 +86,9 @@ class Api::V1::UserController < ApplicationController
   end
 
   def reward_referral
+    # Update the referral count and when it is 5
+    # Reward the user with $10 
+    # and reset referral count back to 0
     update_referral_count
     if @referral.referral_count == 5
       @referral.rewards.create(amount: 10.00)
@@ -85,11 +97,13 @@ class Api::V1::UserController < ApplicationController
   end
 
   def update_referral_count
-    # Reset referral count to zero after reward
+    # Increase the referral count by 1
+    # when user registers with a referral
     @referral.update_attributes(referral_count: referral_count + 1)
   end
 
   def reset_referral_count
+    # Reset referral count to 0 after rewarding user
     @referral.update_attributes(referral_count: 0)
   end
 
@@ -101,15 +115,7 @@ class Api::V1::UserController < ApplicationController
     params.permit(:email, :password)
   end
 
-  def email_params
-    params.permit(:emails)
-  end
-
   def find_referral(referral_token)
     User.find_by(referral_token: referral_token)
-  end
-
-  def authorize
-    user_id = JsonWebToken.decode()
   end
 end
