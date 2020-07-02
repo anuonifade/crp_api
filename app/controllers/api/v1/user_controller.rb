@@ -34,7 +34,7 @@ class Api::V1::UserController < ApplicationController
   end
 
   def invite_users
-
+    emails = SendMailWorker.perform_asyn(email_params)
   end
 
   def update
@@ -99,6 +99,10 @@ class Api::V1::UserController < ApplicationController
 
   def auth_params
     params.permit(:email, :password)
+  end
+
+  def email_params
+    params.permit(:emails)
   end
 
   def find_referral(referral_token)
