@@ -14,6 +14,7 @@ class AuthorizeApiRequest
   attr_reader :headers
 
   def user
+    # Memoize user object
     @user ||= User.find(decoded_auth_token[:user_id]) if decoded_auth_token 
 
   # rescue in case an exception was shown
@@ -25,7 +26,7 @@ class AuthorizeApiRequest
   end
 
   def decoded_auth_token
-    @decoded_auth_token ||= JsonWebToken.decode(http_auth_header[:user_id])
+    @decoded_auth_token ||= JsonWebToken.decode(http_auth_header)
   end
 
   def http_auth_header
@@ -33,6 +34,6 @@ class AuthorizeApiRequest
       return headers['Authorization'].split(' ').last
     end
 
-    raise(ExceptionHandler::MissingToken, message.missing_token)
+    raise(ExceptionHandler::MissingToken, Message.missing_token)
   end
 end
